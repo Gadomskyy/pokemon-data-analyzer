@@ -1,6 +1,5 @@
 import requests
 import pandas as pd
-import json
 
 
 def get_pokemon_data(number):
@@ -12,14 +11,12 @@ def get_pokemon_data(number):
 
 
 def all_pokemon_data_to_df():
-    df = pd.DataFrame(columns=['id', 'name'])
+    df = pd.DataFrame(
+        columns=['id', 'name', 'height', 'weight', 'abilities', 'forms', 'moves', 'stats', 'types'])
     for i in range(1, 10):
         pokemon = get_pokemon_data(i)
-        pokemon_normalized = pd.json_normalize(pokemon)[['id', 'name']]
+        pokemon_normalized = pd.json_normalize(pokemon)[
+            ['id', 'name', 'height', 'weight', 'abilities', 'forms', 'moves', 'stats', 'types']]
         df = pd.concat([df, pokemon_normalized])
     return df
-
-
-
-print(all_pokemon_data_to_df())
 
