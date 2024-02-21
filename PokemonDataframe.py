@@ -22,7 +22,6 @@ def all_pokemon_data_to_df():
                  'height',
                  'weight',
                  'forms',
-                 'moves',
                  'stats',
                  'abilities',
                  'types'])
@@ -34,10 +33,10 @@ def all_pokemon_data_to_df():
              'height',
              'weight',
              'forms',
-             'moves',
-             'stats',]]
+             'stats']]
         pokemon_normalized['abilities'] = [get_attribute_names(pokemon, 'abilities', 'ability')]
         pokemon_normalized['types'] = [get_attribute_names(pokemon, 'types', 'type')]
+        pokemon_normalized['moves'] = [get_attribute_names(pokemon, 'moves', 'move')]
         df = pd.concat([df, pokemon_normalized])
     return df
 
