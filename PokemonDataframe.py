@@ -19,6 +19,10 @@ def get_forms(pokemon):
     forms = df['name'].tolist()
     return forms
 
+def get_stats(pokemon):
+    df = pd.json_normalize(pokemon['stats'])
+    dict_list = [{'stat': stat, 'value': value} for stat, value in zip(df['stat.name'], df['base_stat'])]
+    return dict_list
 
 
 def all_pokemon_data_to_df():
@@ -36,12 +40,12 @@ def all_pokemon_data_to_df():
             ['id',
              'name',
              'height',
-             'weight',
-             'stats']]
+             'weight',]]
         pokemon_normalized['abilities'] = [get_attribute_names(pokemon, 'abilities', 'ability')]
         pokemon_normalized['types'] = [get_attribute_names(pokemon, 'types', 'type')]
         pokemon_normalized['moves'] = [get_attribute_names(pokemon, 'moves', 'move')]
         pokemon_normalized['forms'] = [get_forms(pokemon)]
+        pokemon_normalized['stats'] = [get_stats(pokemon)]
         df = pd.concat([df, pokemon_normalized])
     return df
 
