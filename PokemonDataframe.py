@@ -27,8 +27,7 @@ def get_stats(pokemon):
 
 def all_pokemon_data_to_df():
     df = pd.DataFrame(
-        columns=['id',
-                 'name',
+        columns=['name',
                  'height',
                  'weight',
                  'stats',
@@ -37,16 +36,17 @@ def all_pokemon_data_to_df():
     for i in range(1, 10):
         pokemon = get_pokemon_data(i)
         pokemon_normalized = pd.json_normalize(pokemon)[
-            ['id',
-             'name',
+            ['name',
              'height',
-             'weight',]]
+             'weight']]
         pokemon_normalized['abilities'] = [get_attribute_names(pokemon, 'abilities', 'ability')]
         pokemon_normalized['types'] = [get_attribute_names(pokemon, 'types', 'type')]
         pokemon_normalized['moves'] = [get_attribute_names(pokemon, 'moves', 'move')]
         pokemon_normalized['forms'] = [get_forms(pokemon)]
         pokemon_normalized['stats'] = [get_stats(pokemon)]
         df = pd.concat([df, pokemon_normalized])
+        df.reset_index(drop=True, inplace=True)
+        df.index += 1
+        df.index.rename('id', inplace=True)
     return df
 
-all_pokemon_data_to_df().to_excel("result.xlsx")
