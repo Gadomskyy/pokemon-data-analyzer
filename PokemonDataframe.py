@@ -22,12 +22,6 @@ def get_forms(pokemon):
     return forms
 
 
-def get_stats(pokemon):
-    df = pd.json_normalize(pokemon['stats'])
-    dict_list = [{'stat': stat, 'value': value} for stat, value in zip(df['stat.name'], df['base_stat'])]
-    return dict_list
-
-
 def get_stat(pokemon, name):
     df = pd.json_normalize(pokemon['stats'])
     stat = df.loc[df['stat.name'] == name, 'base_stat'].iloc[0]
