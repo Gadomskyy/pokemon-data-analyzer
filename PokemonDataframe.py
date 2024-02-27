@@ -49,8 +49,6 @@ def all_pokemon_data_to_df():
             ['name',
              'height',
              'weight']]
-        pokemon_normalized['abilities'] = [get_attribute_names(pokemon, 'abilities', 'ability')]
-        pokemon_normalized['types'] = [get_attribute_names(pokemon, 'types', 'type')]
         pokemon_normalized['moves'] = [get_attribute_names(pokemon, 'moves', 'move')]
         pokemon_normalized['forms'] = [get_forms(pokemon)]
         pokemon_normalized['hp'] = get_stat(pokemon, 'hp')
@@ -58,6 +56,8 @@ def all_pokemon_data_to_df():
         pokemon_normalized['special-attack'] = get_stat(pokemon, 'special-attack')
         pokemon_normalized['special-defense'] = get_stat(pokemon, 'special-defense')
         pokemon_normalized['speed'] = get_stat(pokemon, 'speed')
+        pokemon_normalized['abilities'] = [get_attribute_names(pokemon, 'abilities', 'ability')]
+        pokemon_normalized['types'] = [get_attribute_names(pokemon, 'types', 'type')]
         df = pd.concat([df, pokemon_normalized])
         df.reset_index(drop=True, inplace=True)
         df.index += 1
