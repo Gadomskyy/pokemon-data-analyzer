@@ -52,6 +52,7 @@ def all_pokemon_data_to_df():
         pokemon_normalized['moves'] = [get_attribute_names(pokemon, 'moves', 'move')]
         pokemon_normalized['forms'] = [get_forms(pokemon)]
         pokemon_normalized['hp'] = get_stat(pokemon, 'hp')
+        pokemon_normalized['attack'] = get_stat(pokemon, 'attack')
         pokemon_normalized['defense'] = get_stat(pokemon, 'defense')
         pokemon_normalized['special-attack'] = get_stat(pokemon, 'special-attack')
         pokemon_normalized['special-defense'] = get_stat(pokemon, 'special-defense')
@@ -63,3 +64,5 @@ def all_pokemon_data_to_df():
         df.index += 1
         df.index.rename('id', inplace=True)
     return df
+
+all_pokemon_data_to_df().to_excel("result.xlsx")
