@@ -27,6 +27,27 @@ def get_stat(pokemon, name):
     stat = df.loc[df['stat.name'] == name, 'base_stat'].iloc[0]
     return stat
 
+def get_generation(id):
+    if id <= 151:
+        return 1
+    elif id <= 251:
+        return 2
+    elif id <= 386:
+        return 3
+    elif id <= 493:
+        return 4
+    elif id <= 649:
+        return 5
+    elif id <= 721:
+        return 6
+    elif id <= 809:
+        return 7
+    elif id <= 905:
+        return 8
+    elif id <= 1025:
+        return 9
+    else:
+        return 0
 
 def all_pokemon_data_to_df():
     pokemon_number = 1025
@@ -35,6 +56,9 @@ def all_pokemon_data_to_df():
         columns=['name',
                  'height',
                  'weight',
+                 'generation',
+                 'moves',
+                 'forms',
                  'hp',
                  'attack',
                  'defense',
@@ -49,6 +73,7 @@ def all_pokemon_data_to_df():
             ['name',
              'height',
              'weight']]
+        pokemon_normalized['generation'] = [get_generation(i)]
         pokemon_normalized['moves'] = [get_attribute_names(pokemon, 'moves', 'move')]
         pokemon_normalized['forms'] = [get_forms(pokemon)]
         pokemon_normalized['hp'] = get_stat(pokemon, 'hp')
